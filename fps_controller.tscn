@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://tv1pt4t0qbxt"]
+
+[ext_resource type="Script" path="res://fps_controller.gd" id="1_3q5ts"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3m4uo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q3kta"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_runig"]
+material = SubResource("StandardMaterial3D_q3kta")
+
+[sub_resource type="Environment" id="Environment_0hnlq"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qsdeg"]
+
+[sub_resource type="Compositor" id="Compositor_4a6il"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_3q5ts")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3m4uo")
+
+[node name="Placeholdermesh" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_runig")
+skeleton = NodePath("../..")
+
+[node name="CameraController" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+environment = SubResource("Environment_0hnlq")
+attributes = SubResource("CameraAttributesPractical_qsdeg")
+compositor = SubResource("Compositor_4a6il")
+current = true
